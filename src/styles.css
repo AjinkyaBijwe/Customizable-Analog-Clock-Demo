@@ -28,6 +28,7 @@ body {
     height: 45px;
     font-size: 17px;
     color: #ffffff;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
 .custom-control.custom-switch.dark-switch label {
@@ -36,8 +37,8 @@ body {
 
 .custom-control.custom-switch.dark-switch .custom-control-input:checked~.custom-control-label::before {
     color: #fff;
-    border-color: #585858;
-    background-color: #585858;
+    border-color: #091921;
+    background-color: #091921;
 }
 
 .clock-options, .clock {
@@ -55,7 +56,7 @@ body {
 }
 
 .clock-options .nav-tabs .nav-link.active {
-    background: #f9fbfd;
+    background: #e3f1ff;
     color: #007bff;
 }
 
@@ -111,6 +112,8 @@ body {
 
 .settings-options .checkbox input[type="checkbox"] {
     margin-right: 0.5rem;
+    position: relative;
+    top: 1px;
 }
 
 .font-options .form-group,
@@ -170,6 +173,7 @@ body {
 .color-picker-popover .popover-body .sketch-picker .wrap input {
     font-size: 12px !important;
     padding: 5px 7px 4px 7px !important;
+    border-radius: 4px;
 }
 
 .color-picker-popover .popover-body .sketch-picker .wrap span {
@@ -195,6 +199,7 @@ body {
 }
 
 .json-settings {
+    margin-bottom: 10px;
     overflow-y: auto;
     width: calc(100% - 7px);
     border: 1px solid #ccc;
@@ -204,4 +209,63 @@ body {
     border-radius: 4px;
     background: #fff;
     resize: none;
+}
+/* Dark Theme */
+.dark-theme .content {
+    background: #0e222b;
+}
+
+.dark-theme .content .clock-options, .dark-theme .content .clock {
+    background: #091921;
+    color: #fff;
+}
+
+.dark-theme .clock-options .nav-tabs .nav-link.active {
+    background: #0d2531;
+    color: #fff;
+}
+
+.dark-theme .navbar {
+    background-color: #133546 !important;
+}
+
+.dark-theme .style-section .form-control {
+    background: #0c242f;
+    color: #fff;
+    border-color: #123342;
+}
+
+.dark-theme .color-wrapper {
+    border-color: #123342;
+}
+
+.dark-theme .nav-tabs {
+    border-color: #154961;
+}
+
+.dark-theme .clock-options .nav-tabs .nav-link {
+    border-color: #154961;
+}
+
+.dark-theme .json-settings {
+    background: #0e232d;
+    color: #fff;
+    border-color: #123546;
+}
+
+.dark-theme .sketch-picker {
+    background: #0c2633 !important;
+}
+
+.dark-theme .color-picker-popover .popover-body .sketch-picker .wrap input {
+    background: #0c242f !important;
+    color: #fff !important;
+}
+
+.dark-theme .color-picker-popover .popover-body .sketch-picker .wrap span {
+    color: #fff !important;
+}
+
+.dark-theme .bs-popover-top>.arrow::after {
+    border-top-color: #0c2633 !important;
 }

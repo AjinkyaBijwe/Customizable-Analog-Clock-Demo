@@ -1,225 +1,227 @@
-<nav class="navbar navbar-dark bg-primary title">
-    Customizable Analog Demo
-    <div class="form-inline">
-        <div class="custom-control custom-switch dark-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch">
-            <label class="custom-control-label" for="customSwitch">Dark Mode</label>
-          </div>
-    </div>
-</nav>
-<div class="content" fxLayout="row" fxLayout.lt-lg="column">
-    <div fxFlex="60" class="clock-options" fxFlexAlign="top center" fxFlex.lt-lg="100">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-            <li [ngbNavItem]="1">
-                <a ngbNavLink>Options</a>
-                <ng-template ngbNavContent>
-                    <div class="style-section" fxLayout="row" fxLayout.xs="column">
-                        <div class="settings-options" fxFlex="35">
-                            <label class="section-label">Toggle Options</label>
-                            <div class="checkbox">
-                                <label><input type="checkbox" class="option" [(ngModel)]="showDate">Show Date</label>
+<div [ngClass]="{'dark-theme': darkMode}">
+    <nav class="navbar navbar-dark bg-primary title">
+        Customizable Analog Demo
+        <div class="form-inline">
+            <div class="custom-control custom-switch dark-switch">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="darkMode" id="customSwitch">
+                <label class="custom-control-label" for="customSwitch">Dark Mode</label>
+            </div>
+        </div>
+    </nav>
+    <div class="content" fxLayout="row" fxLayout.lt-lg="column">
+        <div fxFlex="60" class="clock-options" fxFlexAlign="top center" fxFlex.lt-lg="100">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                <li [ngbNavItem]="1">
+                    <a ngbNavLink>Options</a>
+                    <ng-template ngbNavContent>
+                        <div class="style-section" fxLayout="row" fxLayout.xs="column">
+                            <div class="settings-options" fxFlex="35">
+                                <label class="section-label">Toggle Options</label>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" class="option" [(ngModel)]="showDate">Show Date</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" class="option" [(ngModel)]="showDigitalClock">Show Digital Clock</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" class="option" [(ngModel)]="showIndicators">Show Indicators</label>
+                                </div>
                             </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" class="option" [(ngModel)]="showDigitalClock">Show Digital Clock</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" class="option" [(ngModel)]="showIndicators">Show Indicators</label>
+                            <div class="settings-buttons" fxFlex="65" fxFlexAlign="center">
+                                <button type="button" class="btn btn-primary" fxFlex="33" (click)="randomize()">Randomize</button>
+                                <button type="button" class="btn btn-danger" fxFlex="33" (click)="resetValues()">Reset to Default</button>
+                                <button type="button" class="btn btn-success" fxFlex="33" (click)="applyStyles()">Apply Settings</button>
                             </div>
                         </div>
-                        <div class="settings-buttons" fxFlex="65" fxFlexAlign="center">
-                            <button type="button" class="btn btn-primary" fxFlex="33" (click)="randomize()">Randomize</button>
-                            <button type="button" class="btn btn-danger" fxFlex="33" (click)="resetValues()">Reset to Default</button>
-                            <button type="button" class="btn btn-success" fxFlex="33" (click)="applyStyles()">Apply Settings</button>
+                        <div class="style-section">
+                            <label class="section-label">Indicators (Comma Separated String)</label>
+                            <input style="font-size: 19px;" type="text" class="form-control" [(ngModel)]="indicators">
                         </div>
-                    </div>
-                    <div class="style-section">
-                        <label class="section-label">Indicators (Comma Separated String)</label>
-                        <input style="font-size: 19px;" type="text" class="form-control" [(ngModel)]="indicators">
-                    </div>
-                    <div class="style-section">
-                        <label class="section-label">Style Options</label>
-                        <div class="font-options" fxLayout="row" fxLayout.xs="column">
-                            <div class="form-group" fxFlex="100">
-                                <label class="section-label option">🖼️ Background URL</label>
-                                <input type="text" class="form-control" [(ngModel)]="styleOptions.clockBackgroundImage">
+                        <div class="style-section">
+                            <label class="section-label">Style Options</label>
+                            <div class="font-options" fxLayout="row" fxLayout.xs="column">
+                                <div class="form-group" fxFlex="100">
+                                    <label class="section-label option">🖼️ Background URL</label>
+                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockBackgroundImage">
+                                </div>
                             </div>
-                        </div>
-                        <div class="font-options" fxLayout="row" fxLayout.xs="column">
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">📝 Font Family</label>
-                                <input type="text" class="form-control" [(ngModel)]="styleOptions.fontFamily">
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">📝 Font Size in Pixels</label>
-                                <input type="number" class="form-control" [(ngModel)]="styleOptions.fontSize">
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Background Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockBackgroundColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover="ngbPopover" (click)="toggleColorPicker(popover, 'clockBackgroundColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockBackgroundColor}">
+                            <div class="font-options" fxLayout="row" fxLayout.xs="column">
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">📝 Font Family</label>
+                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.fontFamily">
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">📝 Font Size in Pixels</label>
+                                    <input type="number" class="form-control" [(ngModel)]="styleOptions.fontSize">
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Background Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockBackgroundColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover="ngbPopover" (click)="toggleColorPicker(popover, 'clockBackgroundColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockBackgroundColor}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Border Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockBorderColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover1="ngbPopover" (click)="toggleColorPicker(popover1, 'clockBorderColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockBorderColor}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Border Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockBorderColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover1="ngbPopover" (click)="toggleColorPicker(popover1, 'clockBorderColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockBorderColor}">
+                            <div class="color-options" fxLayout="row" fxLayout.xs="column">
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Center Border Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockCenterBorderColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover2="ngbPopover" (click)="toggleColorPicker(popover2, 'clockCenterBorderColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockCenterBorderColor}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Center Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockCenterBackgroundColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover3="ngbPopover" (click)="toggleColorPicker(popover3, 'clockCenterBackgroundColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockCenterBackgroundColor}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Second Hand Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockSecondHandColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover4="ngbPopover" (click)="toggleColorPicker(popover4, 'clockSecondHandColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockSecondHandColor}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Minute Hand Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockMinuteHandColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover5="ngbPopover" (click)="toggleColorPicker(popover5, 'clockMinuteHandColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockMinuteHandColor}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="color-options" fxLayout="row" fxLayout.xs="column">
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Center Border Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockCenterBorderColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover2="ngbPopover" (click)="toggleColorPicker(popover2, 'clockCenterBorderColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockCenterBorderColor}">
+                            <div class="color-options" fxLayout="row" fxLayout.xs="column">
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Hour Hand Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockHourHandColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover6="ngbPopover" (click)="toggleColorPicker(popover6, 'clockHourHandColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockHourHandColor}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Indicator Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockIndicatorColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover7="ngbPopover" (click)="toggleColorPicker(popover7, 'clockIndicatorColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockIndicatorColor}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Indicator Icon Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockIndicatorIconColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover8="ngbPopover" (click)="toggleColorPicker(popover8, 'clockIndicatorIconColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockIndicatorIconColor}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">🕗 Indicator Main Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.clockIndicatorMainColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover9="ngbPopover" (click)="toggleColorPicker(popover9, 'clockIndicatorMainColor')" 
+                                            [ngStyle]="{'background': styleOptions.clockIndicatorMainColor}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Center Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockCenterBackgroundColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover3="ngbPopover" (click)="toggleColorPicker(popover3, 'clockCenterBackgroundColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockCenterBackgroundColor}">
+                            <div class="color-options" fxLayout="row" fxLayout.xs="column">
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">Digital 🕗 Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.digitalClockColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover10="ngbPopover" (click)="toggleColorPicker(popover10, 'digitalClockColor')" 
+                                            [ngStyle]="{'background': styleOptions.digitalClockColor}">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Second Hand Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockSecondHandColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover4="ngbPopover" (click)="toggleColorPicker(popover4, 'clockSecondHandColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockSecondHandColor}">
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">Digital 🕗 Background</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.digitalClockBackgroundColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover11="ngbPopover" (click)="toggleColorPicker(popover11, 'digitalClockBackgroundColor')" 
+                                            [ngStyle]="{'background': styleOptions.digitalClockBackgroundColor}">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Minute Hand Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockMinuteHandColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover5="ngbPopover" (click)="toggleColorPicker(popover5, 'clockMinuteHandColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockMinuteHandColor}">
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">📅 Date Color</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.dateColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover12="ngbPopover" (click)="toggleColorPicker(popover12, 'dateColor')" 
+                                            [ngStyle]="{'background': styleOptions.dateColor}">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="color-options" fxLayout="row" fxLayout.xs="column">
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Hour Hand Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockHourHandColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover6="ngbPopover" (click)="toggleColorPicker(popover6, 'clockHourHandColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockHourHandColor}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Indicator Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockIndicatorColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover7="ngbPopover" (click)="toggleColorPicker(popover7, 'clockIndicatorColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockIndicatorColor}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Indicator Icon Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockIndicatorIconColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover8="ngbPopover" (click)="toggleColorPicker(popover8, 'clockIndicatorIconColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockIndicatorIconColor}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">🕗 Indicator Main Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockIndicatorMainColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover9="ngbPopover" (click)="toggleColorPicker(popover9, 'clockIndicatorMainColor')" 
-                                        [ngStyle]="{'background': styleOptions.clockIndicatorMainColor}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="color-options" fxLayout="row" fxLayout.xs="column">
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">Digital 🕗 Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.digitalClockColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover10="ngbPopover" (click)="toggleColorPicker(popover10, 'digitalClockColor')" 
-                                        [ngStyle]="{'background': styleOptions.digitalClockColor}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">Digital 🕗 Background</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.digitalClockBackgroundColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover11="ngbPopover" (click)="toggleColorPicker(popover11, 'digitalClockBackgroundColor')" 
-                                        [ngStyle]="{'background': styleOptions.digitalClockBackgroundColor}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">📅 Date Color</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.dateColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover12="ngbPopover" (click)="toggleColorPicker(popover12, 'dateColor')" 
-                                        [ngStyle]="{'background': styleOptions.dateColor}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" fxFlex="25">
-                                <label class="section-label option">📅 Date Background</label>
-                                <div class="color-selection">
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.dateBackgroundColor">
-                                    <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
-                                        #popover13="ngbPopover" (click)="toggleColorPicker(popover13, 'dateBackgroundColor')" 
-                                        [ngStyle]="{'background': styleOptions.dateBackgroundColor}">
+                                <div class="form-group" fxFlex="25">
+                                    <label class="section-label option">📅 Date Background</label>
+                                    <div class="color-selection">
+                                        <input type="text" class="form-control" [(ngModel)]="styleOptions.dateBackgroundColor">
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                            #popover13="ngbPopover" (click)="toggleColorPicker(popover13, 'dateBackgroundColor')" 
+                                            [ngStyle]="{'background': styleOptions.dateBackgroundColor}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </ng-template>
-            </li>
-            <li [ngbNavItem]="2">
-                <a ngbNavLink>Copy Settings</a>
-                <ng-template ngbNavContent>
-                    <textarea class="json-settings" spellcheck="false" [ngModel]="config | json" rows="25">
-                        {{config | json}}
-                    </textarea>
-                </ng-template>
-            </li>
-        </ul>
-        <div [ngbNavOutlet]="nav" class="clock-tab"></div>
-    </div>
-    <div fxFlex="40" class="clock" fxFlexAlign="top center" fxFlex.lt-lg="100">
-        <div class="clock-card">
-            <div id="my-clock"></div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                    <a ngbNavLink>Copy Settings</a>
+                    <ng-template ngbNavContent>
+                        <textarea class="json-settings" spellcheck="false" [ngModel]="config | json" rows="25">
+                            {{config | json}}
+                        </textarea>
+                    </ng-template>
+                </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="clock-tab"></div>
+        </div>
+        <div fxFlex="40" class="clock" fxFlexAlign="top center" fxFlex.lt-lg="100">
+            <div class="clock-card">
+                <div id="my-clock"></div>
+            </div>
         </div>
     </div>
+    <ng-template #colorPicker let-color="color">
+        <color-sketch [color]="color" (onChangeComplete)="colorPickerEvent($event)"></color-sketch>
+    </ng-template>  
 </div>
-<ng-template #colorPicker let-color="color">
-    <color-sketch [color]="color" (onChangeComplete)="colorPickerEvent($event)"></color-sketch>
-</ng-template>

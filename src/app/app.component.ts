@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
     showDate: boolean;
     showDigitalClock: boolean;
     showIndicators: boolean;
+    darkMode: boolean;
     styleOptions: any;
     indicators: string[];
     config: any;
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
 
     getDefaultStyles = () => {
         this.active = 1;
+        this.darkMode = true;
         this.showDate = false;
         this.showDigitalClock = false;
         this.showIndicators = true;
@@ -112,6 +114,5 @@ export class AppComponent implements OnInit {
 
     colorPickerEvent = ($event) => {
         this.styleOptions[`${this.selectedStyle}`] = $event.color.hex;
-        $event.stopPropagation();
     }
 }
