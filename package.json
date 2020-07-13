@@ -1,13 +1,14 @@
 {
   "name": "customizable-analog-clock-demo",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng deploy -- --base-href=https://ajinkyabijwe.github.io/Customizable-Analog-Clock-Demo/"
   },
   "private": true,
   "dependencies": {
