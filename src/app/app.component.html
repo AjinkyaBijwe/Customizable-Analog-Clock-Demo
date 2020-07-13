@@ -68,7 +68,7 @@
                                     <label class="section-label option">🕗 Border Color</label>
                                     <div class="color-selection">
                                         <input type="text" class="form-control" [(ngModel)]="styleOptions.clockBorderColor">
-                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" placement="top-right" 
                                             #popover1="ngbPopover" (click)="toggleColorPicker(popover1, 'clockBorderColor')" 
                                             [ngStyle]="{'background': styleOptions.clockBorderColor}">
                                         </div>
@@ -110,7 +110,7 @@
                                     <label class="section-label option">🕗 Minute Hand Color</label>
                                     <div class="color-selection">
                                         <input type="text" class="form-control" [(ngModel)]="styleOptions.clockMinuteHandColor">
-                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" placement="top-right"
                                             #popover5="ngbPopover" (click)="toggleColorPicker(popover5, 'clockMinuteHandColor')" 
                                             [ngStyle]="{'background': styleOptions.clockMinuteHandColor}">
                                         </div>
@@ -152,7 +152,7 @@
                                     <label class="section-label option">🕗 Indicator Main Color</label>
                                     <div class="color-selection">
                                         <input type="text" class="form-control" [(ngModel)]="styleOptions.clockIndicatorMainColor">
-                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" placement="top-right"
                                             #popover9="ngbPopover" (click)="toggleColorPicker(popover9, 'clockIndicatorMainColor')" 
                                             [ngStyle]="{'background': styleOptions.clockIndicatorMainColor}">
                                         </div>
@@ -194,7 +194,7 @@
                                     <label class="section-label option">📅 Date Background</label>
                                     <div class="color-selection">
                                         <input type="text" class="form-control" [(ngModel)]="styleOptions.dateBackgroundColor">
-                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" 
+                                        <div class="color-wrapper" [ngbPopover]="colorPicker" triggers="manual" placement="top-right"
                                             #popover13="ngbPopover" (click)="toggleColorPicker(popover13, 'dateBackgroundColor')" 
                                             [ngStyle]="{'background': styleOptions.dateBackgroundColor}">
                                         </div>
@@ -207,9 +207,7 @@
                 <li [ngbNavItem]="2">
                     <a ngbNavLink>Copy Settings</a>
                     <ng-template ngbNavContent>
-                        <textarea class="json-settings" spellcheck="false" [ngModel]="config | json" rows="25">
-                            {{config | json}}
-                        </textarea>
+                        <ngx-codemirror class="generated-settings" [(ngModel)]="config" [autoFocus]="true" [options]="codeOptions"></ngx-codemirror>
                     </ng-template>
                 </li>
             </ul>

@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgbNavModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/markdown/markdown';
 
 @NgModule({
     declarations: [
@@ -16,7 +19,8 @@ import { NgbNavModule, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
         FormsModule,
         FlexLayoutModule,
         NgbNavModule,
-        NgbPopoverModule
+        NgbPopoverModule,
+        CodemirrorModule
     ],
     providers: [],
     bootstrap: [AppComponent]

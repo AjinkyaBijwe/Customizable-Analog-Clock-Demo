@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalogClock } from 'customizable-analog-clock';
 import tinycolor from 'tinycolor2';
+import js_beautify from 'js-beautify';
 
 @Component({
     selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
     config: any;
     active: number;
     selectedStyle: any;
+    codeOptions: any;
 
     ngOnInit() {
         this.getDefaultStyles();
@@ -48,6 +50,12 @@ export class AppComponent implements OnInit {
             digitalClockBackgroundColor: '#13222a'
         }
         this.indicators = ['😄', '🙂', '🥪' , '🦜', '🐊', '💻', '🐅', '🐼', '🐘', '🚴‍♂️', '🏂', '🧑'];
+        this.codeOptions = {
+            theme: 'default',
+            mode: 'application/json',
+            lineWrapping: true,
+            lineNumbers: false
+        }
     }
 
     applyStyles = () => {
@@ -81,7 +89,7 @@ export class AppComponent implements OnInit {
                 digitalClockBackgroundColor: this.styleOptions.digitalClockBackgroundColor
             }
         })
-        this.config = clock.config;
+        this.config = js_beautify(JSON.stringify(clock.config), null);
     }
 
     randomize = () => {
@@ -103,7 +111,9 @@ export class AppComponent implements OnInit {
             colorPickerPopover.close();
         } else {
             colorPickerPopover.autoClose = 'outside';
-            colorPickerPopover.placement = 'top';
+            if (colorPickerPopover.placement === 'auto') {
+                colorPickerPopover.placement = 'top';
+            }
             colorPickerPopover.popoverClass = 'color-picker-popover';
             colorPickerPopover.open({
                 color: this.styleOptions[`${styleName}`]
