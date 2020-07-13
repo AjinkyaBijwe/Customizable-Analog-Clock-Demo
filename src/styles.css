@@ -216,6 +216,11 @@ body {
     direction: ltr;
     font-size: 14px;
     border-radius: 4px;
+    -webkit-text-stroke-width: 0px !important;
+}
+
+.CodeMirror-lines {
+    padding: 0;
 }
 
 ngx-codemirror.generated-settings {
@@ -381,33 +386,27 @@ ngx-codemirror.generated-settings {
 
 .dark-theme .cm-builtin {
 	color: #66d9ef;
-
 }
 
 .dark-theme .cm-string {
 	color: #e6db74;
-
 }
 
 .dark-theme .cm-variable {
 	color: #f8f8f2;
-
 }
 
 .dark-theme .cm-variable-2 {
 	color: #ffffff;
-
 }
 
 .dark-theme .cm-variable-3,
 .dark-theme .cm-type {
 	color: #66d9ef;
-
 }
 
 .dark-theme .cm-def {
 	color: #fd971f;
-
 }
 
 .dark-theme .cm-bracket {
@@ -433,7 +432,6 @@ ngx-codemirror.generated-settings {
 
 .dark-theme .CodeMirror-activeline-background {
 	background: #373831;
-
 }
 
 .dark-theme .CodeMirror-matchingbracket {
