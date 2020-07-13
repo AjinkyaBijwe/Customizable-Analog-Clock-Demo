@@ -118,6 +118,10 @@
               "devServerTarget": "Customizable-Analog-Clock-Demo:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
