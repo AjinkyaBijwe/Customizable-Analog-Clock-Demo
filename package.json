@@ -28,7 +28,7 @@
     "@types/js-beautify": "^1.11.0",
     "bootstrap": "^4.4.0",
     "codemirror": "^5.55.0",
-    "customizable-analog-clock": "file:../Customizable-Analog-Clock",
+    "customizable-analog-clock": "^0.1.5",
     "js-beautify": "^1.11.0",
     "ngx-color": "^6.0.0",
     "rxjs": "~6.5.4",
