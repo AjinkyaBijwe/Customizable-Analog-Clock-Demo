@@ -1,4 +1,5 @@
 @import '~codemirror/lib/codemirror';
+@import './assets/stylesheets/font-awesome.css';
 
 html,
 body {
@@ -33,6 +34,13 @@ body {
     box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
+.title-text {
+    max-width: calc(50vw - 60px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .custom-control.custom-switch.dark-switch label {
     cursor: pointer;
 }
@@ -41,6 +49,22 @@ body {
     color: #fff;
     border-color: #091921;
     background-color: #091921;
+}
+
+.header-icons {
+    font-size: 30px;
+    position: absolute;
+    right: 150px;
+}
+
+.header-icons a {
+    margin-right: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.header-icons a:last-child {
+    margin-right: 10px;
 }
 
 .content {

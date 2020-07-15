@@ -1,11 +1,21 @@
 <div [ngClass]="{'dark-theme': darkMode}">
     <nav class="navbar navbar-dark bg-primary title">
-        Customizable Analog Clock Demo
+        <div class="title-text" title="Customizable Analog Clock Demo">
+            🕗 Customizable Analog Clock Demo
+        </div> 
         <div class="form-inline">
             <div class="custom-control custom-switch dark-switch">
                 <input type="checkbox" class="custom-control-input" [(ngModel)]="darkMode" id="customSwitch">
                 <label class="custom-control-label" for="customSwitch">Dark Mode</label>
             </div>
+        </div>
+        <div class="header-icons">
+            <a href="https://github.com/AjinkyaBijwe/Customizable-Analog-Clock" target="_blank" title="Github">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.npmjs.com/package/customizable-analog-clock" target="_blank" title="NPM">
+                <i class="fab fa-npm"></i>
+            </a>
         </div>
     </nav>
     <div class="content" fxLayout="row" fxLayout.lt-lg="column">
