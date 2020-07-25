@@ -45,24 +45,24 @@
                         </div>
                         <div class="style-section">
                             <label class="section-label">Indicators (Comma Separated String)</label>
-                            <input style="font-size: 19px;" type="text" class="form-control" [(ngModel)]="indicators">
+                            <input style="font-size: 19px;" type="text" class="form-control" (keyup)="applyStyles()" [(ngModel)]="indicators">
                         </div>
                         <div class="style-section">
                             <label class="section-label">Style Options</label>
                             <div class="font-options" fxLayout="row" fxLayout.xs="column">
                                 <div class="form-group" fxFlex="100">
                                     <label class="section-label option">🖼️ Background URL</label>
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.clockBackgroundImage">
+                                    <input type="text" class="form-control" (keyup)="applyStyles()" [(ngModel)]="styleOptions.clockBackgroundImage">
                                 </div>
                             </div>
                             <div class="font-options" fxLayout="row" fxLayout.xs="column">
                                 <div class="form-group" fxFlex="25">
                                     <label class="section-label option">📝 Font Family</label>
-                                    <input type="text" class="form-control" [(ngModel)]="styleOptions.fontFamily">
+                                    <input type="text" class="form-control" (keyup)="applyStyles()" [(ngModel)]="styleOptions.fontFamily">
                                 </div>
                                 <div class="form-group" fxFlex="25">
                                     <label class="section-label option">📝 Font Size in Pixels</label>
-                                    <input type="number" class="form-control" [(ngModel)]="styleOptions.fontSize">
+                                    <input type="number" class="form-control" (keyup)="applyStyles()" [(ngModel)]="styleOptions.fontSize">
                                 </div>
                                 <div class="form-group" fxFlex="25">
                                     <label class="section-label option">🕗 Background Color</label>

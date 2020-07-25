@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
     active: number;
     selectedStyle: any;
     codeOptions: any;
+    timeout: any;
 
     ngOnInit() {
         this.getDefaultStyles();
@@ -124,5 +125,9 @@ export class AppComponent implements OnInit {
 
     colorPickerEvent = ($event) => {
         this.styleOptions[`${this.selectedStyle}`] = $event.color.hex;
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            this.applyStyles();
+        }, 500);
     }
 }
