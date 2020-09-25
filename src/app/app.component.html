@@ -1,4 +1,5 @@
 <div [ngClass]="{'dark-theme': darkMode}">
+    <div class="toast" [class.show]="setFullScreenError">{{ setFullScreenError }}</div>
     <nav class="navbar navbar-dark bg-primary title">
         <div class="title-text" title="Customizable Analog Clock Demo">
             🕗 Customizable Analog Clock Demo
@@ -25,7 +26,7 @@
                     <a ngbNavLink>Options</a>
                     <ng-template ngbNavContent>
                         <div class="style-section" fxLayout="row" fxLayout.xs="column">
-                            <div class="settings-options" fxFlex="35">
+                            <div class="settings-options" fxFlex="70">
                                 <label class="section-label">Toggle Options</label>
                                 <div class="checkbox">
                                     <label><input type="checkbox" class="option" [(ngModel)]="showDate">Show Date</label>
@@ -37,10 +38,15 @@
                                     <label><input type="checkbox" class="option" [(ngModel)]="showIndicators">Show Indicators</label>
                                 </div>
                             </div>
-                            <div class="settings-buttons" fxFlex="65" fxFlexAlign="center">
-                                <button type="button" class="btn btn-primary" fxFlex="33" (click)="randomize()">Randomize</button>
-                                <button type="button" class="btn btn-danger" fxFlex="33" (click)="resetValues()">Reset to Default</button>
-                                <button type="button" class="btn btn-success" fxFlex="33" (click)="applyStyles()">Apply Settings</button>
+                            <div class="settings-buttons" fxFlex="30" fxFlexAlign="center" fxLayout="column">
+                                <div class="settings-buttons">
+                                    <button type="button" class="btn btn-primary" fxFlex="50" (click)="randomize()">Randomize</button>
+                                    <button type="button" class="btn btn-danger" fxFlex="50" (click)="resetValues()">Reset</button>
+                                </div>
+                                <div class="settings-buttons">
+                                    <button type="button" class="btn btn-success" fxFlex="50" (click)="applyStyles()">Apply</button>
+                                    <button type="button" class="btn btn-info" fxFlex="50" (click)="clockFullScreen()">Full Screen</button>
+                                </div>
                             </div>
                         </div>
                         <div class="style-section">
@@ -223,7 +229,7 @@
             </ul>
             <div [ngbNavOutlet]="nav" class="clock-tab"></div>
         </div>
-        <div fxFlex="40" class="clock" fxFlexAlign="top center" fxFlex.lt-lg="100">
+        <div fxFlex="40" class="clock" fxFlexAlign="top center" fxFlex.lt-lg="100" #fullScreen>
             <div class="clock-card">
                 <div id="my-clock"></div>
             </div>

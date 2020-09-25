@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AnalogClock } from 'customizable-analog-clock';
 import tinycolor from 'tinycolor2';
 import js_beautify from 'js-beautify';
+import fscreen from 'fscreen';
 
 @Component({
     selector: 'app-root',
@@ -19,10 +20,31 @@ export class AppComponent implements OnInit {
     selectedStyle: any;
     codeOptions: any;
     timeout: any;
+    @ViewChild('fullScreen') divRef;
+    hasFullscreenSupport: boolean;
+    isFullscreen: boolean;
+    setFullScreenError: any;
+    toastTimeout: any;
 
     ngOnInit() {
         this.getDefaultStyles();
         this.applyStyles();
+        this.hasFullscreenSupport = fscreen.fullscreenEnabled;
+        if (this.hasFullscreenSupport) {
+            fscreen.addEventListener('fullscreenchange', () => {
+                this.isFullscreen = fscreen.fullscreenElement ? true: false;
+                const elem = document.getElementById('my-clock');
+                if (this.isFullscreen) {
+                    if (elem) {
+                        elem.style.width = elem.style.height = 'calc(50vw - 30px)';
+                    }
+                } else {
+                    if (elem) {
+                        elem.style.width = elem.style.height = 'calc(38vw - 30px)';
+                    }
+                }
+            }, false);
+        }
     }
 
     getDefaultStyles = () => {
@@ -129,5 +151,19 @@ export class AppComponent implements OnInit {
         this.timeout = setTimeout(() => {
             this.applyStyles();
         }, 500);
+    }
+
+    clockFullScreen = () => {
+        this.setFullScreenError = null;
+        if (this.hasFullscreenSupport && !this.isFullscreen) {
+            const elem = this.divRef.nativeElement;
+            fscreen.requestFullscreen(elem);
+        } else {
+            this.setFullScreenError = 'Full Screen Not Supported. Please Try Disabling Adblocker or Other Extensions';
+            clearTimeout(this.toastTimeout);
+            this.toastTimeout = setTimeout(() => {
+                this.setFullScreenError = null;
+            }, 3000);
+        }
     }
 }

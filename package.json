@@ -29,6 +29,7 @@
     "bootstrap": "^4.4.0",
     "codemirror": "^5.55.0",
     "customizable-analog-clock": "^0.1.5",
+    "fscreen": "^1.1.0",
     "js-beautify": "^1.11.0",
     "ngx-color": "^6.0.0",
     "rxjs": "~6.5.4",
